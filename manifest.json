@@ -1,5 +1,5 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 3,
   "name": "FocusTube",
   "version": "1.0",
   "description": "FocusTube: Take Control of Your YouTube Experience. Hide recommended videos and the side panel for a distraction-free viewing.",

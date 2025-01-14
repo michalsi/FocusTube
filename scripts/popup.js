@@ -1,11 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
     const enableBlockingCheckbox = document.getElementById('enableBlocking');
-    // Load the current setting
+
     chrome.storage.local.get('enableBlocking', function (data) {
-        enableBlockingCheckbox.checked = data.enableBlocking !== false; // Default to true if undefined
+        enableBlockingCheckbox.checked = data.enableBlocking !== false;
     });
-    // Save the setting when the checkbox is changed
+
     enableBlockingCheckbox.addEventListener('change', function () {
-        chrome.storage.local.set({ enableBlocking: enableBlockingCheckbox.checked });
+        const isEnabled = enableBlockingCheckbox.checked;
+        chrome.storage.local.set({ enableBlocking: isEnabled }, function () {
+
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, { action: 'toggleBlocking', enabled: isEnabled });
+            });
+        });
     });
 });
