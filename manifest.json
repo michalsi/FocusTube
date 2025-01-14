@@ -14,8 +14,10 @@
       ],
       "run_at": "document_start",
       "js": [
-        "content.js"
-      ]
+        "content.js",
+        "scripts/popup.js"
+      ],
+      "css": ["styles/popup.css"]
     }
   ],
   "action": {
